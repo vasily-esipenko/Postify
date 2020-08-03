@@ -25,8 +25,10 @@ export default {
 
 #app {
     text-align: center;
-    margin: 0 auto;
     font-family: 'Roboto', sans-serif;
     overflow-x: hidden;
+    min-height: 100%;
+
+    margin-bottom: -50px;
 }
 </style>
