@@ -23,7 +23,7 @@ export default {
             state.messages = messages;
         },
         insertNewMessage(state, message) {
-            state.messages.unshift(message);
+            state.messages.push(message);
         }
     },
     state: {
