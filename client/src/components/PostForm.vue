@@ -2,9 +2,30 @@
     <div>
         <form class="postform" @submit.prevent="submit">
             <h6>Write your own post: </h6>
-            <input type="text" class="username-input" placeholder="username" v-model="message.username">
-            <input type="text" class="subject-input" placeholder="subject" v-model="message.subject" data-error="*subject is required">
-            <textarea class="text-input" placeholder="Write your thoughts" v-model="message.message" data-error="*text is required"></textarea>
+
+            <div v-if="message.username.length <= 30">
+                <input type="text" class="username-input" placeholder="username" v-model="message.username">
+            </div>
+            <div v-else>
+                <input disabled type="text" class="username-input grey-text text-lighten-5" v-model="message.username">
+            </div>
+
+            <div v-if="message.subject.length <= 80">
+                <input type="text" class="subject-input" placeholder="subject" v-model="message.subject">
+            </div>
+            <div v-else>
+                <input disabled type="text" class="subject-input grey-text text-lighten-5" v-model="message.subject">
+            </div>
+
+            <div v-if="charLeft > 0">
+            <textarea class="text-input" placeholder=" Write your thoughts" v-model="message.message"></textarea>
+            </div>
+            <div v-else>
+                <textarea disabled class="text-input" v-model="message.message"></textarea>
+            </div>
+
+            <div class="char-left">Characters left: {{ charLeft }}</div>
+
             <button class="post-btn" type="submit">Write</button>
         </form>
     </div>
@@ -21,22 +42,47 @@ export default {
                 username: "",
                 subject: "",
                 message: ""
-            }
+            },
+            maxChars: 500
         }
     },
     methods: {
         ...mapActions(['addMessage']),
         submit() {
-            this.addMessage(this.message);
-            this.message.username = this.message.subject = this.message.message = "";
+            if (this.checkLength()) {
+                this.addMessage(this.message);
+                this.message.username = this.message.subject = this.message.message = "";
+            } else {
+                alert('Sorry, too many characters. \nTry again, please.');
+            }
+        },
+        checkLength() {
+            if (this.message.username.length <= 30 && this.message.subject.length <= 50 && this.message.message.length <= 500) {
+                return true;
+            } else {
+                return false;
+            }
         }
     },
+    computed: {
+        charLeft() {
+            return this.maxChars - this.message.message.length;
+        },
+    }
 }
 </script>
 
 <style scoped>
+
 h6 {
     margin-bottom: 1rem;
+}
+
+.char-left {
+    text-align: left;
+    font-weight: 300;
+    color: #ccc;
+    margin-left: 1rem;
 }
 
 .postform {
@@ -57,10 +103,6 @@ h6 {
     border-radius: 3px;
 }
 
-input:focus {
-    color: #1D9AF2;
-}
-
 .subject-input {
     width: 100%;
     height: 30px;
@@ -73,8 +115,8 @@ input:focus {
 .text-input {
     margin-top: 1rem;
     width: 100%;
-    min-height: 30px;
-    resize: vertical;
+    height: 120px;
+    resize: none;
     font-weight: 500;
     color: #fafafa;
     border: 1px solid #555;
