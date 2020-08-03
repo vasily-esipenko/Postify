@@ -39,4 +39,3 @@ const PORT = config.get('port') || 7000;
 app.listen(PORT, () => {
     console.log(`Server is on post ${PORT}`);
 });
-
