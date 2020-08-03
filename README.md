@@ -4,10 +4,10 @@ Social media fullstack layout with Vue CLI 3
 
 ## Current stack (MEVN)
 
-..* MongoDB
+* MongoDB
 
-..* Express.js
+* Express.js
 
-..* Vue.js (Vue CLI)
+* Vue.js (Vue CLI)
 
-..* Node.js
+* Node.js
