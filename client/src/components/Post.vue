@@ -60,6 +60,7 @@ export default {
 
 .post-text {
     margin-top: 4px;
+    overflow-wrap: break-word;
 }
 
 </style>
