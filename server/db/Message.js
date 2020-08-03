@@ -2,8 +2,8 @@ const db = require('./connection');
 const Joi = require('joi');
 
 const schema = Joi.object({
-    username: Joi.string().alphanum().required(),
-    subject: Joi.string().required(),
+    username: Joi.string().max(30).alphanum().required(),
+    subject: Joi.string().max(80).required(),
     message: Joi.string().max(500).required(),
     imageUrl: Joi.string().uri({
         scheme: [
@@ -20,7 +20,7 @@ function getAll() {
 
 function insertMsg(message) {
     if (!message.username) {
-        message.username = "Anon"
+        message.username = "Anonymous";
     }
     const result = schema.validate(message);
     if (result.error == null) {
