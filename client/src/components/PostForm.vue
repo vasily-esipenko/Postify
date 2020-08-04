@@ -49,11 +49,17 @@ export default {
     methods: {
         ...mapActions(['addMessage']),
         submit() {
-            if (this.checkLength()) {
+            if (this.checkLength() && this.checkMsg()) {
                 this.addMessage(this.message);
                 this.message.username = this.message.subject = this.message.message = "";
             } else {
-                alert('Sorry, too many characters. \nTry again, please.');
+                if (!this.checkLength()) {
+                    alert('Sorry, too many characters. \nTry again, please.');
+                } else if (!this.checkMsg()) {
+                    alert(`Sorry, you didn't write anything in your message. \nTry again, please.`);
+                } else {
+                    alert(`Something went wrong... \nTry again, please.`);
+                }
             }
         },
         checkLength() {
@@ -61,6 +67,13 @@ export default {
                 return true;
             } else {
                 return false;
+            }
+        },
+        checkMsg() {
+            if (this.message.subject.length == 0 || this.message.message.length == 0) {
+                return false;
+            } else {
+                return true;
             }
         }
     },
