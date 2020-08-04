@@ -2,7 +2,7 @@
 
 Social media fullstack layout with Vue CLI 3
 
-## Current stack (MEVN)
+## Technical stack (MEVN)
 
 * MongoDB
 
