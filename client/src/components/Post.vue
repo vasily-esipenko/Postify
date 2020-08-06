@@ -2,18 +2,30 @@
     <div>
         <div class="post" v-for="message in getMessages" v-bind:key="message._id">
             <div class="post-header">
+                <span>
                 <img class="userpic" alt="userpic" src="https://via.placeholder.com/40">
                 <span class="username">{{ message.username }}</span>
+                </span>
             </div>
             <div class="post-body">
                 <div class="post-subject">{{ message.subject }}</div>
                 <p class="post-text">{{ message.message }}</p>
+            </div>
+            <div class="reaction-bar">
+                <span> 
+                    <Like /> 
+                    <Share />
+                    <Save />
+                </span>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import Like from './buttons/Like.vue';
+import Share from './buttons/Share.vue';
+import Save from './buttons/Save.vue';
 import {mapGetters, mapActions} from 'vuex';
 
 export default {
@@ -22,6 +34,11 @@ export default {
     methods: mapActions(['fetchMessages']),
     async mounted() {
         this.fetchMessages();
+    },
+    components: {
+        Like,
+        Share,
+        Save,
     }
 }
 </script>
@@ -41,9 +58,14 @@ export default {
     text-align: left;
     font-size: 14px;
     margin-bottom: 4px;
+    width: 30%;
+    border: 1px solid #777;
+    border-radius: 3px;
+    padding: 4px;
 }
 
 .username {
+    display: inline;
     margin-left: 1rem;
     font-weight: 600;
     font-style: italic;
@@ -55,12 +77,19 @@ export default {
 
 .post-subject {
     text-align: center;
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .post-text {
     margin-top: 4px;
+    font-size: 17px;
     overflow-wrap: break-word;
+}
+
+.reaction-bar {
+    margin: 1rem 1.5rem 0;
+    padding: 0;
+    text-align: left;
 }
 
 </style>
