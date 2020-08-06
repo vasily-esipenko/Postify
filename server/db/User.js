@@ -16,19 +16,15 @@ function getAllUsers() {
 }
 
 function insertUser(user) {
-    const result = schema.validate(user);
-    if (result.error == null) {
-        user.created = new Date();
-        bcrypt.hash(user.password, 11).then(hashed => {
-            user.password = hashed;
-        });
-        return users.insert(user);
-    } else {
-        result ;Promise.reject(result.error);
-    }
+    user.created = new Date();
+    bcrypt.hash(user.password, 11).then(hashed => {
+        user.password = hashed;
+    });
+    return users.insert(user);
 }
 
 module.exports = {
     getAllUsers,
     insertUser,
+    schema,
 }
