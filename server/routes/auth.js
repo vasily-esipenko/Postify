@@ -9,12 +9,17 @@ router.get('/', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-    users.insertUser(req.body).then(user => {
-        res.json(user);
-    }).catch(error => {
-        res.status(500);
-        res.json(error);
-    });
+    const result = users.schema.validate(req.body);
+    if (result.error == null) {
+        users.insertUser(req.body).then(user => {
+            res.json(user);
+        }).catch(error => {
+            res.status(500);
+            res.json(error);
+        });
+    } else {
+        result ;Promise.reject(result.error);
+    }
 });
 
 router.get('/login', (req, res) =>{
