@@ -3,26 +3,54 @@
         <div class="auth">
             <h4 class="title">Sign up to write posts</h4>
             <div class="inputs">
-                <input class="username grey-text text-lighten-5" type="text" placeholder="username" v-model="username">
-                <input class="email grey-text text-lighten-5" type="email" placeholder="email" v-model="email">
-                <input class="password grey-text text-lighten-5" type="password" placeholder="password" v-model="password">
+                <input class="username grey-text text-lighten-5" type="text" placeholder="username" v-model="authForm.username">
+                <input class="email grey-text text-lighten-5" type="email" placeholder="email" v-model="authForm.email">
+                <input class="password grey-text text-lighten-5" type="password" placeholder="password" v-model="authForm.password">
+                <input class="password grey-text text-lighten-5" type="password" placeholder="repeat password" v-model="repeat">
             </div>
             <span class="buttons">
-                <button class="signup">Sign Up</button>
-                <button class="login">Log in</button>    
+                <button class="signup" @click="register">Sign Up</button>
+                <button class="login" @click="login">Log in</button>    
             </span>
         </div>
     </div>
 </template>
 
 <script>
+import {mapActions} from 'vuex';
+
 export default {
     name: 'AuthForm',
     data() {
         return {
-            username: "",
-            email: "",
-            password: "",
+            authForm: {
+                username: "",
+                email: "",
+                password: ""
+            },
+            repeat: "",
+        }
+    },
+    methods: {
+        ...mapActions(['registerUser']),
+        register() {
+            if (this.validUser()) {
+                this.registerUser(this.authForm);
+                this.authForm.username = this.authForm.email = this.authForm.password = this.repeat ="";
+            } else {
+                alert(`Passwords doesn't match. Try again`);
+            }
+        
+        },
+        login() {
+
+        },
+        validUser() {
+            if (this.authForm.password == this.repeat) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }
