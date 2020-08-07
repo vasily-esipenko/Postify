@@ -1,11 +1,16 @@
 <template>
     <div>
-        <h6>Development in progress...</h6>
+        <AuthForm />
     </div>
 </template>
 
 <script>
+import AuthForm from '../components/AuthForm.vue';
+
 export default {
     name: 'Profile',
+    components: {
+        AuthForm,
+    }
 }
 </script>
