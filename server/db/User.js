@@ -23,8 +23,22 @@ function insertUser(user) {
     return users.insert(user);
 }
 
+function loginUser(user) {
+    bcrypt.compare(req.body.password, user.password, (err, res) => {
+        if (err) {
+            next(err);
+        }
+        if (res) {
+            //JWT token
+            next(res);
+        }
+    });
+}
+
 module.exports = {
     getAllUsers,
     insertUser,
+    loginUser,
     schema,
+    users,
 }
