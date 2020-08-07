@@ -8,22 +8,53 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/register', (req, res) => {
+router.post('/register', (req, res, next) => {
     const result = users.schema.validate(req.body);
     if (result.error == null) {
-        users.insertUser(req.body).then(user => {
-            res.json(user);
-        }).catch(error => {
-            res.status(500);
-            res.json(error);
+        users.users.findOne({
+            username: req.body.username
+        }).then(user => {
+            if (user) {
+                const error = new Error('User already exists');
+                next(error);
+            } else {
+                users.insertUser(req.body).then(user => {
+                    res.json(user);
+                }).catch(error => {
+                    res.status(500);
+                    res.json(error);
+                });
+            }
         });
     } else {
-        result ;Promise.reject(result.error);
+        next(result.error);
     }
 });
 
-router.get('/login', (req, res) =>{
-    res.send('Login');
+router.get('/login', (req, res, next) =>{
+    const result = schema.validate(req.body);
+    if (result.error == null) {
+        users.users.findOne({
+            username: req.body.username
+        }).then(user => {
+            if (user) {
+                bcrypt.compare(req.body.password, user.password, (err, res) => {
+                    if (err) {
+                        next(err);
+                    }
+                    if (res) {
+                        //JWT token
+                        next(res);
+                    }
+                });
+            } else {
+                const error = new Error('There is no such user');
+                next(error);
+            }
+        })
+    } else {
+        next(result.error);
+    }
 });
 
 module.exports = router;
