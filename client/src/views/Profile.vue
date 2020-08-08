@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import AuthForm from '../components/AuthForm.vue';
+import AuthForm from '../components/auth/AuthForm.vue';
 
 export default {
     name: 'Profile',
