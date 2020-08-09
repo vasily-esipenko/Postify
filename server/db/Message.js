@@ -10,7 +10,8 @@ const schema = Joi.object({
         scheme: [
             /https?/
         ]
-    })
+    }),
+    likes: Joi.number().positive().integer()
 });
 
 // Connect messages collection
