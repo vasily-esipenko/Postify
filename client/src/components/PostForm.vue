@@ -3,11 +3,8 @@
         <form class="postform" @submit.prevent="submit">
             <h6>Write your own post: </h6>
 
-            <div v-if="message.username.length <= 30">
-                <input type="text" class="username-input" placeholder="username" v-model="message.username">
-            </div>
-            <div v-else>
-                <input disabled type="text" class="username-input grey-text text-lighten-5" v-model="message.username">
+            <div class="alert" v-if="alertMessage" role="alert">
+                {{alertMessage}}
             </div>
 
             <div v-if="message.subject.length <= 80">
@@ -17,7 +14,7 @@
                 <input disabled type="text" class="subject-input grey-text text-lighten-5" v-model="message.subject">
             </div>
 
-            <div v-if="charLeft > 0">
+            <div v-if="maxChars > 0">
             <textarea class="text-input" placeholder=" Write your thoughts" v-model="message.message"></textarea>
             </div>
             <div v-else>
@@ -33,48 +30,48 @@
 
 <script>
 import {mapActions} from 'vuex';
+import Joi from 'joi';
+
+const schema = Joi.object({
+    subject: Joi.string().min(1).max(80).required(),
+    message: Joi.string().min(1).max(500).required()
+});
 
 export default {
     name: 'PostForm',
     data() {
         return {
             message: {
-                username: "",
                 subject: "",
                 message: ""
             },
-            maxChars: 500
+            maxChars: 500,
+            alertMessage: ""
         }
     },
     methods: {
         ...mapActions(['addMessage']),
         submit() {
-            if (this.checkLength() && this.checkMsg()) {
+            if (this.validMessage()) {
                 this.addMessage(this.message);
                 this.message.username = this.message.subject = this.message.message = "";
-            } else {
-                if (!this.checkLength()) {
-                    alert('Sorry, too many characters. \nTry again, please.');
-                } else if (!this.checkMsg()) {
-                    alert(`Sorry, you didn't write anything in your message. \nTry again, please.`);
-                } else {
-                    alert(`Something went wrong... \nTry again, please.`);
-                }
             }
         },
-        checkLength() {
-            if (this.message.username.length <= 30 && this.message.subject.length <= 50 && this.message.message.length <= 500) {
-                return true;
-            } else {
-                return false;
-            }
-        },
-        checkMsg() {
-            if (this.message.subject.length == 0 || this.message.message.length == 0) {
-                return false;
-            } else {
+        validMessage() {
+            const result = schema.validate(this.message);
+            if (result.error == null) {
                 return true;
             }
+
+            if (result.error.message.includes('subject')) {
+                this.alertMessage = 'Subject is invalid';
+            } else if (result.error.message.includes('message')) {
+                this.alertMessage = 'Message is invalid';
+            } else {
+                this.alertMessage = 'Something went wrong. Try again, please';
+            }
+
+            return false;
         }
     },
     computed: {
@@ -89,6 +86,16 @@ export default {
 
 h6 {
     margin-bottom: 1rem;
+}
+
+.alert {
+    width: 80%;
+    height: 3rem;
+    border: 1px solid #f22;
+    border-radius: 3px;
+    margin: 1rem auto;
+    color: #fafafa;
+    background-color: #f22;
 }
 
 .char-left {
