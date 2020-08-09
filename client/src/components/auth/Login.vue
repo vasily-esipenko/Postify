@@ -43,6 +43,11 @@ export default {
             if (this.validUser()) {
                 this.loginUser(this.authForm);
                 this.authForm.email = this.authForm.password = "";
+                if (localStorage.getItem) {
+                    setTimeout(() => {
+                        this.$router.push('/');
+                    }, 1000);
+                }
             }
         },
         validUser() {
@@ -69,6 +74,8 @@ export default {
 .alert {
     width: 80%;
     height: 3rem;
+    border: 1px solid #f22;
+    border-radius: 3px;
     margin: 1rem auto;
     color: #fafafa;
     background-color: #f22;
