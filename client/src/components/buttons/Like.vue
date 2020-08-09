@@ -19,7 +19,7 @@ export default {
     data() {
         return {
             liked: false,
-            numberOfLikes: 0
+            numberOfLikes: 0,
         }
     },
     methods: {
