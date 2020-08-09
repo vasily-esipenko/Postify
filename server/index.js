@@ -8,12 +8,20 @@ const morgan = require('morgan');
 const authRoute = require('./routes/auth');
 const messageRoute = require('./routes/messages');
 
+//Import middlewares
+const authMiddleware = require('./middlewares/middleware');
+
 // App initialization
 const app = express();
 
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:8080'
+}));
+app.use(express.json());
+app.use(authMiddleware.checkTokenSetUser);
+
 
 app.use('/api/user', authRoute);
 app.use('/api/messages', messageRoute);
