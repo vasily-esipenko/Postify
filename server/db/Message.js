@@ -3,7 +3,7 @@ const Joi = require('joi');
 
 // Validation schema
 const schema = Joi.object({
-    username: Joi.string().max(30).alphanum().required(),
+    username: Joi.string().max(30).alphanum(),
     subject: Joi.string().max(80).required(),
     message: Joi.string().max(500).required(),
     imageUrl: Joi.string().uri({
