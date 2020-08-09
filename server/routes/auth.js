@@ -18,7 +18,7 @@ router.post('/register', (req, res, next) => {
         }).then(user => {
             if (user) {
                 const error = new Error('User with this username already exists');
-                res.json(error.message);
+                res.json({message: error.message});
             } else {
                 bcrypt.hash(req.body.password, 11).then(hashed => {
                     const newUser = {
@@ -28,10 +28,23 @@ router.post('/register', (req, res, next) => {
                         created: new Date()
                     }
                     users.users.insert(newUser).then(insertedUser => {
-                        res.json("You have successfully signed up!");
+                        const payload = {
+                            _id: insertedUser._id,
+                            username: insertedUser.username
+                        };
+                        jwt.sign(payload, config.tokenSecret, {
+                            expiresIn: '1d'
+                        }, (err, token) => {
+                            if (err) {
+                                res.status(422);
+                                res.json(err);
+                            } else {
+                                res.json({token: token, message: "You have successfully signed in!"});
+                            }
+                        });
                         }).catch(error => {
                             res.status(500);
-                            res.json(`Something went wrong: ${error}`);
+                            res.json({message: `Something went wrong: ${error}`});
                     });
                 });
             }
@@ -61,18 +74,17 @@ router.post('/login', (req, res, next) =>{
                                 res.status(422);
                                 res.json(err);
                             } else {
-                                const genToken = token;
-                                res.json('You have successfully logged in!');
+                                res.json({token: token, message: "You have successfully logged in!"});
                             }
                         });
                     } else {
                         res.status(422);
-                        res.json('Wrong password');
+                        res.json({message: "Wrong password"});
                     }
                 });
             } else {
                 const error = new Error('There is no such user');
-                res.json(error.message);
+                res.json({message: error.message});
             }
         })
     } else {
