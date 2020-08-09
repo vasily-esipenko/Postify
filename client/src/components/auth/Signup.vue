@@ -55,6 +55,11 @@ export default {
                 }
                 this.registerUser(user);
                 this.authForm.username = this.authForm.email = this.authForm.password = this.authForm.confirmPassword = "";
+                if (localStorage.getItem) {
+                    setTimeout(() => {
+                        this.$router.push('/');
+                    }, 1000);
+                }
             }
         
         },
@@ -90,6 +95,8 @@ export default {
 .alert {
     width: 85%;
     height: 3rem;
+    border: 1px solid #f22;
+    border-radius: 3px;
     margin: 1rem auto;
     color: #fafafa;
     background-color: #f22;
