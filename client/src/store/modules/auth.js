@@ -10,7 +10,14 @@ export default {
                 }
             });
             const response = await res.json();
-            ctx.commit('setResult', response);
+
+            if (localStorage.getItem("token")) {
+                localStorage.token = response.token;
+            } else {
+                localStorage.setItem("token", JSON.stringify(response.token));
+            }
+
+            ctx.commit('setResult', response.message);
         },
         async loginUser(ctx, user) {
             const res = await fetch('http://localhost:7000/api/user/login', {
@@ -21,8 +28,16 @@ export default {
                     "Accept": "application/json"
                 }
             });
+
             const response = await res.json();
-            ctx.commit('setLogResult', response);
+            
+            if (localStorage.getItem("token")) {
+                localStorage.token = response.token;
+            } else {
+                localStorage.setItem("token", JSON.stringify(response.token));
+            }
+
+            ctx.commit('setLogResult', response.message);
         }
     },
     mutations: {
