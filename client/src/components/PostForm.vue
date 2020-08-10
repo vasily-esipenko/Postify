@@ -8,7 +8,7 @@
             </div>
 
             <div v-if="message.subject.length <= 80">
-                <input type="text" class="subject-input" placeholder="subject" v-model="message.subject">
+                <input type="text" class="subject-input" placeholder="title" v-model="message.subject">
             </div>
             <div v-else>
                 <input disabled type="text" class="subject-input grey-text text-lighten-5" v-model="message.subject">
@@ -64,7 +64,7 @@ export default {
             }
 
             if (result.error.message.includes('subject')) {
-                this.alertMessage = 'Subject is invalid';
+                this.alertMessage = 'Title is invalid';
             } else if (result.error.message.includes('message')) {
                 this.alertMessage = 'Message is invalid';
             } else {
