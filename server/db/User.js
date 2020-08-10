@@ -3,7 +3,7 @@ const Joi = require('joi');
 
 // Sign up validation schema
 const schema = Joi.object({
-    username: Joi.string().max(30).alphanum().required(),
+    username: Joi.string().max(30).regex(/(^[a-zA-Z0-9_]+$)/).required(),
     email: Joi.string().email().required(),
     password: Joi.string().regex(/^[a-zA-Z0-9]{8,30}$/).required()
 });
