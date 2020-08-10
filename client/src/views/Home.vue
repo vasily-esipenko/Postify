@@ -31,7 +31,7 @@ export default {
   computed: {
     ...mapGetters(['getMessages']),
     isLoggedIn() {
-        if (localStorage.getItem("token") && localStorage.getItem("token" != "undefined")) {
+        if (localStorage.getItem("token") && localStorage.getItem("token") != "undefined") {
             return true;
         }
 
