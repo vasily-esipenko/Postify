@@ -22,12 +22,6 @@ app.use(cors({
 app.use(express.json());
 app.use(authMiddleware.checkTokenSetUser);
 
-app.use((req, res, next) =>{
-    console.log("This middleware is currently running!");
-    req.isCool = true;
-    next();
-});
-
 // Using routes
 app.use('/api/user', authRoute);
 app.use('/api/messages', messageRoute);
@@ -36,7 +30,7 @@ app.use('/api/messages', messageRoute);
 app.get('/', (req, res) => {
     res.json({
         message: 'Server is working!',
-        isCool: req.isCool
+        user: req.user
     });
 });
 
