@@ -6,6 +6,7 @@
             <ul id="nav-mobile" class="right hide-on-med-and-down right">
                 <li><router-link to="/saved" class="blue-text text-darken-1">Saved</router-link></li>
                 <li><router-link to="/profile" class="blue-text text-darken-1">Profile</router-link></li>
+                <li><a class="blue-text text-darken-1" @click="logout" v-show="isLoggedIn">Logout</a></li>
             </ul>
             </div>
         </nav>
@@ -15,6 +16,21 @@
 <script>
 export default {
     name: 'Navbar',
+    methods: {
+        logout() {
+            localStorage.removeItem("token");
+            location.reload();
+        }
+    },
+    computed: {
+        isLoggedIn() {
+            if (localStorage.getItem("token") && localStorage.getItem("token") != "undefined") {
+                return true;
+            }
+
+            return false;
+        }
+    }
 };
 </script>
 
