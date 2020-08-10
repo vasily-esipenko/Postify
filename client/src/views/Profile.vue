@@ -1,6 +1,11 @@
 <template>
     <div>
-        <AuthForm />
+        <div v-if="isLoggedIn">
+            <h4>This is your profile!</h4>
+        </div>
+        <div v-else>
+            <AuthForm />
+        </div>
     </div>
 </template>
 
@@ -11,6 +16,15 @@ export default {
     name: 'Profile',
     components: {
         AuthForm,
+    },
+    computed: {
+        isLoggedIn() {
+            if (localStorage.getItem("token") && localStorage.getItem("token") != "undefined") {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
 </script>
