@@ -38,5 +38,6 @@ function insertMsg(message) {
 
 module.exports = {
     getAll,
-    insertMsg
+    insertMsg,
+    messages
 };
