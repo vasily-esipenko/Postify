@@ -43,11 +43,10 @@ export default {
             if (this.validUser()) {
                 this.loginUser(this.authForm);
                 this.authForm.email = this.authForm.password = "";
-                if (localStorage.getItem("token") && localStorage.getItem("token") != "undefined") {
-                    setTimeout(() => {
+                setTimeout(() => {
+                    if (localStorage.getItem("token") && localStorage.getItem("token") != "undefined")
                         location.reload();
-                    }, 500);
-                }
+                }, 500);
             }
         },
         validUser() {
