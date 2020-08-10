@@ -43,10 +43,10 @@ export default {
             if (this.validUser()) {
                 this.loginUser(this.authForm);
                 this.authForm.email = this.authForm.password = "";
-                if (localStorage.getItem) {
+                if (localStorage.getItem("token") && localStorage.getItem("token") != "undefined") {
                     setTimeout(() => {
-                        this.$router.push('/');
-                    }, 1000);
+                        location.reload();
+                    }, 500);
                 }
             }
         },
