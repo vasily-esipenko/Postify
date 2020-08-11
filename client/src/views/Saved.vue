@@ -20,6 +20,9 @@
 
 <script>
 import AuthForm from '../components/auth/AuthForm.vue';
+import {mapActions} from 'vuex';
+import jwt from 'jsonwebtoken';
+import config from '/Users/esipe/Postify/server/config/default.json';
 
 export default {
     name: 'Saved',
@@ -28,16 +31,32 @@ export default {
     },
     data() {
         return {
-            savedPosts: []
+            savedPosts: [],
+            isLogged: false,
         }
+    },
+    methods: {
+        ...mapActions(['addUserData']),
     },
     computed: {
         isLoggedIn() {
             if (localStorage.getItem("token") && localStorage.getItem("token") != "undefined") {
-                return true;
+                jwt.verify(JSON.parse(localStorage.getItem("token")), config.tokenSecret, (err, decoded) => {
+                    if (err) {
+                        console.log(err.message);
+                        return false;
+                    }
+                    
+                    if (decoded) {
+                        console.log(decoded);
+                        const decodedData = decoded;
+                        this.addUserData(decodedData);
+                        this.isLogged = true;
+                    }  
+                });
             }
 
-            return false;
+            return this.isLogged;
         }
     }
 }
