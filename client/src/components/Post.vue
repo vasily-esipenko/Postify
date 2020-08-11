@@ -16,6 +16,7 @@
                     <Like /> 
                     <Share />
                     <Save />
+                    <span class="date"> {{ new Date(message.created).toLocaleDateString() }} </span>
                 </span>
             </div>
         </div>
@@ -73,6 +74,7 @@ export default {
 
 .post-body {
     text-align: left;
+    border-bottom: 1px solid #777;
 }
 
 .post-subject {
@@ -90,6 +92,12 @@ export default {
     margin: 1rem 1.5rem 0;
     padding: 0;
     text-align: left;
+}
+
+.date {
+    font-size: 15px;
+    margin-left: 30rem;
+    text-align: right;
 }
 
 </style>
