@@ -30,6 +30,7 @@ router.post('/register', (req, res, next) => {
                     users.users.insert(newUser).then(insertedUser => {
                         const payload = {
                             _id: insertedUser._id,
+                            email: insertedUser.email,
                             username: insertedUser.username
                         };
                         jwt.sign(payload, config.tokenSecret, {
@@ -65,6 +66,7 @@ router.post('/login', (req, res, next) =>{
                     if (result) {
                         const payload = {
                             _id: user._id,
+                            email: user.email,
                             username: user.username
                         };
                         jwt.sign(payload, config.tokenSecret, {
