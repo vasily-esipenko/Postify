@@ -38,6 +38,13 @@ export default {
             }
 
             ctx.commit('setLogResult', response.message);
+        },
+
+        addUserData(ctx, user) {
+            ctx.commit('setUserData', user);
+        },
+        removeUserData(ctx) {
+            ctx.commit('removeUserData');
         }
     },
     mutations: {
@@ -46,11 +53,18 @@ export default {
         },
         setLogResult(state, res) {
             state.logResult = res;
+        },
+        setUserData(state, data) {
+            state.userData = data
+        },
+        removeUserData(state) {
+            state.userData = {}
         }
     },
     state: {
         regResult: "",
         logResult: "",
+        userData: {},
     },
     getters: {
         getResult(state) {
@@ -58,6 +72,9 @@ export default {
         },
         getLogResult(state) {
             return state.logResult;
+        },
+        getUserData(state) {
+            return state.userData;
         }
     }
 }
