@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 import Joi from 'joi';
 
 const schema = Joi.object({
@@ -53,6 +53,7 @@ export default {
         ...mapActions(['addMessage']),
         submit() {
             if (this.validMessage()) {
+                this.message.username = this.getUserData.username;
                 this.addMessage(this.message);
                 this.message.username = this.message.subject = this.message.message = "";
             }
@@ -75,6 +76,7 @@ export default {
         }
     },
     computed: {
+        ...mapGetters(['getUserData']),
         charLeft() {
             return this.maxChars - this.message.message.length;
         },
