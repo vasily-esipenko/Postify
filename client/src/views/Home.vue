@@ -15,12 +15,15 @@
 import Post from '@/components/Post.vue';
 import PostForm from '@/components/PostForm.vue';
 import AuthForm from '@/components/auth/AuthForm.vue';
-import {mapGetters} from 'vuex';
+import {mapGetters, mapActions} from 'vuex';
+import jwt from 'jsonwebtoken';
+import config from '/Users/esipe/Postify/server/config/default.json';
 
 export default {
   name: 'Home',
   data() {
       return {
+          isLogged: false,
       }
   },
   components: {
@@ -28,14 +31,29 @@ export default {
       PostForm,
       AuthForm,
   },
+  methods: {
+      ...mapActions(['addUserData']),
+  },
   computed: {
     ...mapGetters(['getMessages']),
     isLoggedIn() {
         if (localStorage.getItem("token") && localStorage.getItem("token") != "undefined") {
-            return true;
+            jwt.verify(JSON.parse(localStorage.getItem("token")), config.tokenSecret, (err, decoded) => {
+                if (err) {
+                    console.log(err.message);
+                    return false;
+                }
+                
+                if (decoded) {
+                    console.log(decoded);
+                    const decodedData = decoded;
+                    this.addUserData(decodedData);
+                    this.isLogged = true;
+                }  
+            });
         }
 
-        return false;
+        return this.isLogged
     }
   },
 };
