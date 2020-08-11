@@ -14,11 +14,15 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex';
+
 export default {
     name: 'Navbar',
     methods: {
+        ...mapActions(['removeUserData']),
         logout() {
             localStorage.removeItem("token");
+            this.removeUserData();
             location.reload();
         }
     },
