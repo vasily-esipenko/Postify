@@ -9,7 +9,7 @@
         </div>
         <div class="inputs">
             <input class="email grey-text text-lighten-5" type="email" placeholder="email" v-model="authForm.email">
-            <input class="password grey-text text-lighten-5" type="password" placeholder="password" v-model="authForm.password">
+            <input class="password grey-text text-lighten-5" type="password" placeholder="password" v-model="authForm.password" @keyup.enter="login">
         </div>
         <span class="buttons">
             <button class="login" @click="login">Log in</button>
