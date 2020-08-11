@@ -1,9 +1,13 @@
 <template>
     <div>
         <div v-if="isLoggedIn">
-            <h4>This is your profile!</h4>
+            <h4>Your profile</h4>
             <div class="profile">
-                {{ getUserData }}
+                <img class="userpic" alt="userpic" src="https://via.placeholder.com/80">
+                <div class="data">
+                    <div class="username">{{ getUserData.username }}</div>
+                    <div class="email">{{ getUserData.email }}</div>
+                </div>
             </div>
         </div>
         <div v-else>
@@ -55,3 +59,41 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+
+.profile {
+    position: relative;
+    width: 60%;
+    margin: 4em auto;
+    padding: .8em 1em;
+    border: 1px solid #777;
+    border-radius: 3px;
+    text-align: left;
+    font-size: 24px;
+}
+
+.userpic {
+    position: absolute;
+    left: 2%;
+    transform: translateY(-6%);
+    border-radius: 50%;
+    margin-right: 3em;
+}
+
+.data {
+    display: block;
+    margin-left: 5em;
+}
+
+.username {
+    font-weight: 600;
+}
+
+.email {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 22px;
+    color: #bbb;
+}
+</style>
