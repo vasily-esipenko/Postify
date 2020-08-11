@@ -11,7 +11,7 @@
             <input class="username grey-text text-lighten-5" type="text" placeholder="username" v-model="authForm.username">
             <input class="email grey-text text-lighten-5" type="email" placeholder="email" v-model="authForm.email">
             <input class="password grey-text text-lighten-5" type="password" placeholder="password" v-model="authForm.password">
-            <input class="password grey-text text-lighten-5" type="password" placeholder="repeat password" v-model="authForm.confirmPassword">
+            <input class="password grey-text text-lighten-5" type="password" placeholder="repeat password" v-model="authForm.confirmPassword" @keyup.enter="register">
         </div>
         <span class="buttons">
             <button class="signup" @click="register">Sign Up</button>  
