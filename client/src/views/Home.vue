@@ -45,7 +45,6 @@ export default {
                 }
                 
                 if (decoded) {
-                    console.log(decoded);
                     const decodedData = decoded;
                     this.addUserData(decodedData);
                     this.isLogged = true;
