@@ -100,7 +100,7 @@ router.post('/save', (req, res) => {
         {$set: {savedPosts: req.body.savedPost}}
     ).then(updatedUser => {
         if (updatedUser) {
-            res.json(updatedUser.savedPost);
+            res.json(updatedUser.savedPosts);
         }
         else {
             const error = new Error('User not found');
