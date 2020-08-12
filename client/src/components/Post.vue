@@ -15,7 +15,7 @@
                 <span> 
                     <Like /> 
                     <Share />
-                    <Save />
+                    <span @click="addToSaved(message._id)"><Save/></span>
                     <span class="date"> {{ new Date(message.created).toLocaleDateString() }} </span>
                 </span>
             </div>
@@ -32,7 +32,25 @@ import {mapGetters, mapActions} from 'vuex';
 export default {
     name: 'Post',
     computed: mapGetters(['getMessages']),
-    methods: mapActions(['fetchMessages']),
+    methods: {
+        ...mapActions(['fetchMessages', 'addToSavedPosts']),
+        addToSaved(id) {
+            if (this.findPostbyId(id)) {
+                this.addToSavedPosts(this.findPostbyId(id));
+            } else {
+                console.log('Something went wrong');
+                console.log(this.findPostbyId(id));
+                console.log(id);
+            }
+        },
+        findPostbyId(id) {
+            for (let i = 0; i < this.getMessages.length; i++) {
+                if (this.getMessages[i]._id == id) {
+                    return this.getMessages[i];
+                }
+            }
+        }
+    },
     async mounted() {
         this.fetchMessages();
     },
