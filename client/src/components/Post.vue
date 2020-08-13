@@ -31,16 +31,21 @@ import {mapGetters, mapActions} from 'vuex';
 
 export default {
     name: 'Post',
+    data() {
+        return {
+            savedPosts: []
+        }
+    },
     computed: mapGetters(['getMessages']),
     methods: {
         ...mapActions(['fetchMessages', 'addToSavedPosts']),
         addToSaved(id) {
-            if (this.findPostbyId(id)) {
-                this.addToSavedPosts(this.findPostbyId(id));
+            const post = this.findPostbyId(id);
+            if (post) {
+                this.savedPosts.push(post);
+                this.addToSavedPosts(this.savedPosts);
             } else {
                 console.log('Something went wrong');
-                console.log(this.findPostbyId(id));
-                console.log(id);
             }
         },
         findPostbyId(id) {
