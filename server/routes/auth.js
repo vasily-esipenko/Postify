@@ -94,19 +94,4 @@ router.post('/login', (req, res, next) =>{
     }
 });
 
-router.post('/save', (req, res) => {
-    users.users.findOneAndUpdate(
-        {email: req.body.email},
-        {$set: {savedPosts: req.body.savedPost}}
-    ).then(updatedUser => {
-        if (updatedUser) {
-            res.json(updatedUser.savedPosts);
-        }
-        else {
-            const error = new Error('User not found');
-            res.json({message: error.message});
-        }
-    });
-});
-
 module.exports = router;
