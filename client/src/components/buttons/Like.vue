@@ -55,4 +55,10 @@ export default {
 .notliked {
     color: #fafafa;
 }
+
+@media (max-width: 415px) {
+    .like {
+        font-size: 18px;
+    }
+}
 </style>
