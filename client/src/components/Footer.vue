@@ -1,5 +1,5 @@
 <template>
-    <footer class="footer-copyright">
+    <footer>
             <div class="container">
             Vasily Esipenko, 2020
             <a class="about-a about-a--footer" href="https://t.me/Vasily_Esipenko" target="_blank">
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style scoped>
-.footer-copyright {
+footer {
     text-align: left;
     height: 60px;
     padding: 10px 0 0;
@@ -43,5 +43,30 @@ export default {
 
 .about-a--footer:hover {
     opacity: .8;
+}
+
+@media (max-width: 770px) {
+    footer {
+        text-align: left;
+        left: 25%;
+    }
+}
+
+@media (max-width: 415px) {
+    footer {
+        left: 12%;
+    }
+}
+
+@media (max-width: 370px) {
+    footer {
+        left: 8%;
+    }
+}
+
+@media (max-width: 330px) {
+    footer {
+        left: 3%;
+    }
 }
 </style>
