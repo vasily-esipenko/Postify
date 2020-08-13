@@ -17,6 +17,12 @@
     opacity: .9;
 }
 
+@media (max-width: 415px) {
+    .share {
+        font-size: 18px;
+    }
+}
+
 </style>
 
 <script>
