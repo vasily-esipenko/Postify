@@ -1,11 +1,13 @@
 <template>
     <div>
         <h4 class="title">Sign up to write posts</h4>
-        <div class="alert" v-if="alertMessage" role="alert">
+        <div class="alert" v-show="alertMessage" role="alert">
             {{alertMessage}}
+            <span class="closeAlert" @click="closeAlert"><i class="far fa-times-circle"></i></span>
         </div>
-        <div class="result" v-if="getResult" role="alert">
-            <p>{{ getResult }}</p>
+        <div class="result" v-show="getResult && getResultServer" role="alert">
+            {{ getResult }}
+            <span class="closeLogResult" @click="closeLogResult"><i class="far fa-times-circle"></i></span>
         </div>
         <div class="inputs">
             <input class="username grey-text text-lighten-5" type="text" placeholder="username" v-model="authForm.username">
@@ -42,6 +44,7 @@ export default {
                 confirmPassword: "",
             },
             alertMessage: "",
+            getResultServer: true,
         }
     },
     methods: {
@@ -84,6 +87,12 @@ export default {
             }
 
             return false;
+        },
+        closeAlert() {
+            this.alertMessage = '';
+        },
+        closeLogResult() {
+            this.getResultServer = false;
         }
     },
     computed: mapGetters(['getResult']),
@@ -101,16 +110,24 @@ export default {
     background-color: #f22;
 }
 
+.closeAlert {
+    cursor: pointer;
+    text-align: right;
+}
+
 .result {
     width: 80%;
-    height: auto;
+    height: 3rem;
+    border-radius: 3px;
     margin: 1rem auto;
-    padding: .5rem .3rem;
     color: #fafafa;
     border: 1px solid #1D9AF2;
-    border-radius: 3px;
-    text-align: center;
     background-color: #1D9AF2;
+}
+
+.closeLogResult {
+    cursor: pointer;
+    text-align: right;
 }
 
 .inputs {
