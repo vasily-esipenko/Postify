@@ -84,55 +84,6 @@ export default {
 
 <style scoped>
 
-.post {
-    width: 60%;
-    height: auto;
-    margin: 40px auto;
-    padding: 1rem;
-    border: 1px solid #777;
-    border-radius: 3px;
-    z-index: 1;
-}
-
-.post-header {
-    text-align: left;
-    font-size: 14px;
-    margin-bottom: 4px;
-    width: 30%;
-    border: 1px solid #777;
-    border-radius: 3px;
-    padding: 4px;
-}
-
-.username {
-    display: inline;
-    margin-left: 1rem;
-    font-weight: 600;
-    font-style: italic;
-}
-
-.post-body {
-    text-align: left;
-    border-bottom: 1px solid #777;
-}
-
-.post-subject {
-    text-align: center;
-    font-size: 20px;
-}
-
-.post-text {
-    margin-top: 4px;
-    font-size: 17px;
-    overflow-wrap: break-word;
-}
-
-.reaction-bar {
-    margin: 1rem 1.5rem 0;
-    padding: 0;
-    text-align: left;
-}
-
 .buttons {
     font-size: 20px;
     color: #777;
@@ -154,4 +105,9 @@ export default {
     text-align: right;
 }
 
+@media (max-width: 415px) {
+    .buttons {
+        font-size: 18px;
+    }
+}
 </style>
