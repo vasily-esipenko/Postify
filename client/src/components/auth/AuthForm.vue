@@ -41,7 +41,7 @@ export default {
     width: 62%;
     border: 1px solid #777;
     border-radius: 3px;
-    margin: 40px auto 60px;
+    margin: 4rem auto 6rem;
     padding: 1rem 1.2rem;
 }
 
@@ -52,4 +52,34 @@ export default {
     text-decoration: underline dashed #999;
 }
 
+
+@media (max-width: 660px) {
+    .auth {
+        width: 74%;
+    }
+}
+
+@media (max-width: 660px) {
+    .auth {
+        width: 78%;
+    }
+}
+
+@media (max-width: 415px) {
+    .auth {
+        margin: 2rem auto;
+        width: 90%;
+    }
+
+    .change {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 360px) {
+    .auth {
+        width: 96%;
+        margin: 2em auto;
+    }
+}
 </style>
