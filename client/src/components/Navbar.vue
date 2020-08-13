@@ -14,20 +14,23 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 
 export default {
     name: 'Navbar',
     methods: {
-        ...mapActions(['removeUserData']),
+        ...mapActions(['removeUserData', 'addSavedPostsToServer']),
         logout() {
             localStorage.removeItem("token");
             this.removeUserData();
+            this.addSavedPostsToServer(this.getUserData.email, this.getSavedPosts);
+            localStorage.removeItem("savedPosts");
             location.reload();
         }
     },
 
     computed: {
+        ...mapGetters(['getUserData', 'getSavedPosts']),
         isLoggedIn() {
             if (localStorage.getItem("token") && localStorage.getItem("token") != "undefined") {
                 return true;
