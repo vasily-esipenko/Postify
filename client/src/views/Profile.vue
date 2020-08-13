@@ -95,4 +95,24 @@ export default {
     font-size: 22px;
     color: #bbb;
 }
+
+@media (max-width: 500px) {
+    .profile {
+        width: 80%;
+    }
+
+    .data {
+        margin-left: 4.5em;
+    }
+}
+
+@media (max-width: 360px) {
+    .profile {
+        width: 94%;
+    }
+
+    .data {
+        margin-left: 4em;
+    }
+}
 </style>
