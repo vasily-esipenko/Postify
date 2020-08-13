@@ -50,4 +50,10 @@ export default {
     color: #fafafa;
 }
 
+@media (max-width: 415px) {
+    .save {
+        font-size: 18px;
+    }
+}
+
 </style>
