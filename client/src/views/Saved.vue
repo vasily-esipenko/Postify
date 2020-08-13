@@ -23,9 +23,11 @@
             </div>
             <div class="reaction-bar">
                 <span> 
-                    <Like /> 
-                    <Share />
-                    <Save/>
+                    <span class="buttons">
+                        <i class="far fa-heart"></i>
+                        <i class="fas fa-share" id="share"></i>
+                        <i class="fas fa-bookmark" id="save"></i>
+                    </span>
                     <span class="date"> {{ new Date(post.created).toLocaleDateString() }} </span>
                 </span>
             </div>
@@ -38,9 +40,6 @@
 </template>
 
 <script>
-import Like from '../components/buttons/Like.vue';
-import Save from '../components/buttons/Save.vue';
-import Share from '../components/buttons/Share.vue';
 import AuthForm from '../components/auth/AuthForm.vue';
 import {mapActions, mapGetters} from 'vuex';
 import jwt from 'jsonwebtoken';
@@ -50,9 +49,6 @@ export default {
     name: 'Saved',
     components: {
         AuthForm,
-        Like,
-        Save,
-        Share,
     },
     data() {
         return {
@@ -135,6 +131,21 @@ export default {
     margin: 1rem 1.5rem 0;
     padding: 0;
     text-align: left;
+}
+
+.buttons {
+    font-size: 20px;
+    color: #777;
+    opacity: .8;
+}
+
+#share {
+    margin-left: 2rem;
+}
+
+#save {
+    margin-left: 2rem;
+    color: #1D9AF2;
 }
 
 .date {
