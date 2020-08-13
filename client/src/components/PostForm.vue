@@ -162,4 +162,22 @@ h6 {
     transform: scale(1.1);
 }
 
+@media (max-width: 660px) {
+    .postform {
+        width: 70%;
+    }
+}
+
+@media (max-width: 415px) {
+    .postform {
+        width: 90%;
+    }
+}
+
+@media (max-width: 320px) {
+    .postform {
+        width: 98%;
+    }
+}
+
 </style>
