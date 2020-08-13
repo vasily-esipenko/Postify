@@ -9,6 +9,8 @@
 <script>
 import Navbar from '@/components/Navbar.vue';
 import Footer from '@/components/Footer.vue';
+import 'materialize-css';
+import 'materialize-css/dist/css/materialize.min.css';
 
 export default {
   name: 'app',
