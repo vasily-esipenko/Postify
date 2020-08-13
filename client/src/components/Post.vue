@@ -67,7 +67,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .post {
     width: 60%;
     height: auto;
@@ -81,8 +81,8 @@ export default {
 .post-header {
     text-align: left;
     font-size: 14px;
-    margin-bottom: 4px;
-    width: 30%;
+    margin-bottom: 1rem;
+    width: 42%;
     border: 1px solid #777;
     border-radius: 3px;
     padding: 4px;
@@ -103,6 +103,7 @@ export default {
 .post-subject {
     text-align: center;
     font-size: 20px;
+    overflow-wrap: break-word;
 }
 
 .post-text {
@@ -119,8 +120,98 @@ export default {
 
 .date {
     font-size: 15px;
-    margin-left: 30rem;
     text-align: right;
+    margin-left: 2rem;
+}
+
+@media (max-width: 990px) {
+    .post {
+        width: 64%;
+    }
+}
+
+@media (max-width: 880px) {
+    .post {
+        width: 72%;
+    }
+
+    .post-header {
+        width: 46%;
+    }
+}
+
+@media (max-width: 770px) {
+    .post {
+        width: 80%;
+    }
+}
+
+@media (max-width: 675px) {
+    .post {
+        width: 82%;
+    }
+    .post-header {
+        width: 48%;
+    }
+}
+
+@media (max-width: 575px) {
+    .post {
+        width: 90%;
+    }
+
+    .post-subject {
+        font-size: 19px;
+    }
+
+    .post-text {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 415px) {
+    .post {
+        width: 96%;
+    }
+
+    .post-header {
+        font-size: 12px;
+        width: 60%;
+    }
+
+    .post-subject {
+        font-size: 18px;
+    }
+
+    .post-text {
+        font-size: 15px;
+    }
+
+    .date {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 330px) {
+    .post {
+        width: 100%;
+    }
+
+    .post-header {
+        font-size: 11px;
+    }
+
+    .post-subject {
+        font-size: 17px;
+    }
+
+    .post-text {
+        font-size: 14px;
+    }
+
+    .date {
+        font-size: 13px;
+    }
 }
 
 </style>
