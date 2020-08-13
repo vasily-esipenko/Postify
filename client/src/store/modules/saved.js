@@ -2,30 +2,22 @@ import auth from './auth';
 
 export default {
     actions: {
-        async addToSavedPosts(ctx, post) {
-            ctx.commit('setSavedPost', post);
+        async addToSavedPosts(ctx, posts) {
+            ctx.commit('setSavedPost', posts);
         }
     },
     mutations: {
-        setSavedPost(state, post) {
-            if (!(post in state.savedPosts)) {
-                state.savedPosts.push(post);
-            }
-        },
-        setServerSavedPosts(state, posts) {
-            state.serverSavedPosts = posts;
+        setSavedPost(state, posts) {
+            state.savedPosts = posts;
+            localStorage.setItem("savedPosts", JSON.stringify(posts));
         }
     },
     state: {
-        savedPosts: [],
-        serverSavedPosts: []
+        savedPosts: JSON.parse(localStorage.getItem("savedPosts"))
     },
     getters: {
         getSavedPosts(state) {
-            return state.savedPosts;
-        },
-        getServerSavedPosts(state) {
-            return state.serverSavedPosts;
+            return Array.from(new Set(state.savedPosts));
         }
     }
 }
