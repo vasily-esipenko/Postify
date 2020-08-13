@@ -47,9 +47,7 @@ export default {
                 this.loginUser(this.authForm);
                 this.authForm.email = this.authForm.password = "";
                 setTimeout(() => {
-                    if (localStorage.getItem("token") && localStorage.getItem("token") != "undefined") {
-                        location.reload();
-                    }
+                    location.reload();
                 }, 500);
             }
         },
