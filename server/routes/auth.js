@@ -31,7 +31,8 @@ router.post('/register', (req, res, next) => {
                         const payload = {
                             _id: insertedUser._id,
                             email: insertedUser.email,
-                            username: insertedUser.username
+                            username: insertedUser.username,
+                            created: insertedUser.created
                         };
                         jwt.sign(payload, config.tokenSecret, {
                             expiresIn: '1d'
@@ -67,7 +68,8 @@ router.post('/login', (req, res, next) =>{
                         const payload = {
                             _id: user._id,
                             email: user.email,
-                            username: user.username
+                            username: user.username,
+                            created: user.created
                         };
                         jwt.sign(payload, config.tokenSecret, {
                             expiresIn: '1d'
@@ -100,7 +102,7 @@ router.post('/save', (req, res) => {
         {$set: {savedPosts: req.body.savedPosts}}
     ).then(updatedUser => {
         if (updatedUser) {
-            res.json(updatedUser.savedPosts);
+            res.json(updatedUser);
         }
         else {
             const error = new Error('User not found');
