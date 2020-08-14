@@ -21,9 +21,13 @@ export default {
     methods: {
         ...mapActions(['removeUserData', 'addSavedPostsToServer']),
         logout() {
+            const savedData = {
+                email: this.getUserData.email,
+                savedPosts: JSON.parse(localStorage.getItem("savedPosts"))
+            };
             localStorage.removeItem("token");
             this.removeUserData();
-            this.addSavedPostsToServer(this.getUserData.email, this.getSavedPosts);
+            this.addSavedPostsToServer(savedData);
             localStorage.removeItem("savedPosts");
             location.reload();
         }
