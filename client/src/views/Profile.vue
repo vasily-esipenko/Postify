@@ -7,6 +7,7 @@
                 <div class="data">
                     <div class="username">{{ getUserData.username }}</div>
                     <div class="email">{{ getUserData.email }}</div>
+                    <div class="joined">Joined on {{ new Date(getUserData.created).toLocaleDateString() }}</div>
                 </div>
             </div>
         </div>
@@ -49,7 +50,7 @@ export default {
                         const decodedData = decoded;
                         this.addUserData(decodedData);
                         this.isLogged = true;
-                    }  
+                    }
                 });
             }
 
@@ -86,6 +87,10 @@ export default {
 }
 
 .username {
+    font-weight: 600;
+}
+
+.joined {
     font-weight: 600;
 }
 
