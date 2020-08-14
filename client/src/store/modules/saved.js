@@ -3,16 +3,16 @@ export default {
         async addToSavedPosts(ctx, posts) {
             ctx.commit('setSavedPost', posts);
         },
-        async addSavedPostsToServer(ctx, userEmail, savedPosts) {
-            const res = await fetch('http://localhost:7000', {
+        async addSavedPostsToServer(request) {
+            const res = await fetch('http://localhost:7000/api/user/save', {
                 method: "POST",
-                body: {email: userEmail, savedPosts: savedPosts},
+                body: JSON.stringify(request),
                 headers: {
                     "Content-Type": "application/json",
                     "Accept": "application/json"
                 }
             });
-            const response = await res.json()
+            const response = await res.json();
             console.log(response);
         }
     },
