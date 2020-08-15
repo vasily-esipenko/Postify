@@ -12,7 +12,7 @@
                 <p class="post-text">{{ message.message }}</p>
             </div>
             <div class="reaction-bar">
-                <span> 
+                <span>
                     <Like /> 
                     <Share />
                     <span @click="addToSaved(message._id)"><Save/></span>
