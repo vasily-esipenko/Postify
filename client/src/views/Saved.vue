@@ -132,6 +132,11 @@ export default {
     text-align: right;
 }
 
+.noposts {
+    margin: 10rem auto 17rem;
+    font-size: 16px;
+}
+
 @media (max-width: 415px) {
     .buttons {
         font-size: 18px;
