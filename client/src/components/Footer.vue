@@ -24,9 +24,9 @@ export default {
 <style scoped>
 footer {
     text-align: left;
-    height: 60px;
     padding: 10px 0 0;
     position: relative;
+    height: 3rem;
     left: -15%;
     margin: 10px 0 0;
     font-size: 16px;
