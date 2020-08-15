@@ -96,6 +96,7 @@ nav {
     background-color: #333;
     position: absolute;
     padding: .8rem;
+    overflow: hidden;
 }
 
 @media (max-width: 993px) {
