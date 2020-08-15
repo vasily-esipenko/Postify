@@ -20,6 +20,7 @@ export default {
         return {
             liked: false,
             numberOfLikes: 0,
+            ableToLike: true
         }
     },
     methods: {
@@ -31,8 +32,8 @@ export default {
         },
         removeLike() {
             this.numberOfLikes--;
-        }
-    }
+        },
+    },
 }
 </script>
 
