@@ -103,7 +103,12 @@ export default {
 
 @media (max-width: 500px) {
     .profile {
-        width: 80%;
+        width: 90%;
+        font-size: 20px;
+    }
+
+    .email {
+        font-size: 18px;
     }
 
     .data {
@@ -113,7 +118,12 @@ export default {
 
 @media (max-width: 360px) {
     .profile {
-        width: 94%;
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .email {
+        font-size: 17px;
     }
 
     .data {
