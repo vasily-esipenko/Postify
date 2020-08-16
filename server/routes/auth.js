@@ -96,6 +96,19 @@ router.post('/login', (req, res, next) =>{
     }
 });
 
+router.post('/verify', (req, res) => {
+    jwt.verify(req.body.token, config.tokenSecret, (err, decoded) => {
+        if (err) {
+            res.json({message: err, result: false});
+            console.log(err);
+        }
+        
+        if (decoded) {
+            res.json({data: decoded, result: true});
+        }
+    });
+});
+
 router.post('/save', (req, res) => {
     users.users.findOneAndUpdate(
         {email: req.body.email},
