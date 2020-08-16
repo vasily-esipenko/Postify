@@ -39,12 +39,24 @@ export default {
 
             ctx.commit('setLogResult', response.message);
         },
-
-        addUserData(ctx, user) {
-            ctx.commit('setUserData', user);
-        },
         removeUserData(ctx) {
             ctx.commit('removeUserData');
+        },
+        async verifyUser(ctx, token) {
+            const res = await fetch('http://localhost:7000/api/user/verify', {
+                method: "POST",
+                body: JSON.stringify(token),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                }
+            });
+            const response = await res.json();
+            localStorage.setItem("userData", JSON.stringify(response.data))
+            localStorage.setItem("isLogged", JSON.stringify(response.result));
+        },
+        changeVerifyResult(ctx, status) {
+            ctx.commit('changeVerifyResult', status);
         }
     },
     mutations: {
@@ -54,17 +66,12 @@ export default {
         setLogResult(state, res) {
             state.logResult = res;
         },
-        setUserData(state, data) {
-            state.userData = data
-        },
-        removeUserData(state) {
-            state.userData = {}
-        }
     },
     state: {
         regResult: "",
         logResult: "",
-        userData: {},
+        verifyResult: JSON.parse(localStorage.getItem("isLogged")),
+        userData: JSON.parse(localStorage.getItem("userData")),
     },
     getters: {
         getResult(state) {
@@ -75,6 +82,9 @@ export default {
         },
         getUserData(state) {
             return state.userData;
+        },
+        getVerifyResult(state) {
+            return state.verifyResult;
         }
     }
 }
