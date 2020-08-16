@@ -41,14 +41,17 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['loginUser']),
+        ...mapActions(['loginUser', 'verifyUser']),
         login() {
             if (this.validUser()) {
                 this.loginUser(this.authForm);
                 this.authForm.email = this.authForm.password = "";
                 setTimeout(() => {
+                    const token = {token: JSON.parse(localStorage.getItem("token"))};
+                    this.verifyUser(token);
                     location.reload();
                 }, 500);
+
             }
         },
         validUser() {
