@@ -41,17 +41,18 @@ export default {
         };
     },
     methods: {
-        ...mapActions(['removeUserData', 'addSavedPostsToServer']),
+        ...mapActions(['removeUserData', 'addSavedPostsToServer', 'changeVerifyResult']),
         logout() {
             const savedData = {
                 email: this.getUserData.email,
                 savedPosts: JSON.parse(localStorage.getItem("savedPosts"))
             };
             localStorage.removeItem("token");
-            this.removeUserData();
+            localStorage.removeItem("userData");
+            localStorage.removeItem("isLogged");
             if (localStorage.getItem("savedPosts")) {
                 this.addSavedPostsToServer(savedData);
-                //localStorage.removeItem("savedPosts");
+                localStorage.removeItem("savedPosts");
             }
             location.reload();
         },
