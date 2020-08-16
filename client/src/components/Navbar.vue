@@ -49,8 +49,10 @@ export default {
             };
             localStorage.removeItem("token");
             this.removeUserData();
-            this.addSavedPostsToServer(savedData);
-            localStorage.removeItem("savedPosts");
+            if (localStorage.getItem("savedPosts")) {
+                this.addSavedPostsToServer(savedData);
+                //localStorage.removeItem("savedPosts");
+            }
             location.reload();
         },
         displayMenu() {
