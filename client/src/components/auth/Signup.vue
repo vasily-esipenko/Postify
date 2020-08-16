@@ -48,7 +48,7 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['registerUser']),
+        ...mapActions(['registerUser', 'verifyUser']),
         register() {
             if (this.validUser()) {
                 const user = {
@@ -59,6 +59,8 @@ export default {
                 this.registerUser(user);
                 this.authForm.username = this.authForm.email = this.authForm.password = this.authForm.confirmPassword = "";
                 setTimeout(() => {
+                    const token = {token: JSON.parse(localStorage.getItem("token"))};
+                    this.verifyUser(token);
                     location.reload();
                 }, 500);
             }
