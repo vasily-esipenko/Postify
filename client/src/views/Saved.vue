@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="isLoggedIn">
+        <div v-if="getVerifyResult">
             <h5>Your saved posts</h5>
             <hr>
             <div v-if="getSavedPosts.length">
@@ -41,21 +41,13 @@
 <script>
 import AuthForm from '../components/auth/AuthForm.vue';
 import {mapActions, mapGetters} from 'vuex';
-import jwt from 'jsonwebtoken';
-import config from '/Users/esipe/Postify/server/config/default.json';
 
 export default {
     name: 'Saved',
     components: {
         AuthForm,
     },
-    data() {
-        return {
-            isLogged: false,
-        }
-    },
     methods: {
-        ...mapActions(['addUserData']),
         removeSavedPost(id) {
             const foundPostIndex = this.getSavedPosts.indexOf(this.findSavedPost(id));
             if (foundPostIndex >= 0) {
@@ -73,27 +65,7 @@ export default {
             }
         }
     },
-    computed: {
-        ...mapGetters(['getSavedPosts']),
-        isLoggedIn() {
-            if (localStorage.getItem("token") && localStorage.getItem("token") != "undefined") {
-                jwt.verify(JSON.parse(localStorage.getItem("token")), config.tokenSecret, (err, decoded) => {
-                    if (err) {
-                        console.log(err.message);
-                        return false;
-                    }
-                    
-                    if (decoded) {
-                        const decodedData = decoded;
-                        this.addUserData(decodedData);
-                        this.isLogged = true;
-                    }  
-                });
-            }
-
-            return this.isLogged;
-        }
-    }
+    computed: mapGetters(['getSavedPosts', 'getVerifyResult']),
 }
 </script>
 
