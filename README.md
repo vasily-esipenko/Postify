@@ -2,8 +2,6 @@
 
 Social media fullstack layout with Vue CLI
 
-## [Website Link](https://postify2077.netlify.app/)
-
 ## Technical stack (MEVN)
 
 * MongoDB
