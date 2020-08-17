@@ -1,7 +1,7 @@
 export default {
     actions: {
         async fetchMessages(ctx) {
-            const res = await fetch('http://192.168.1.109:7000/api/messages/get');
+            const res = await fetch('http://localhost:7000/api/messages/get');
             const messages = await res.json();
             ctx.commit('updateMessages', messages);
         },
