@@ -16,8 +16,6 @@ import Post from '@/components/Post.vue';
 import PostForm from '@/components/PostForm.vue';
 import AuthForm from '@/components/auth/AuthForm.vue';
 import {mapGetters, mapActions} from 'vuex';
-import jwt from 'jsonwebtoken';
-import config from '/Users/esipe/Postify/server/config/default.json';
 
 export default {
   name: 'Home',
