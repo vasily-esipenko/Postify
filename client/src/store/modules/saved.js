@@ -6,6 +6,7 @@ export default {
         async addSavedPostsToServer(request) {
             const res = await fetch('http://localhost:7000/api/user/save', {
                 method: "POST",
+                mode: 'no-cors',
                 body: JSON.stringify(request),
                 headers: {
                     "Content-Type": "application/json",
