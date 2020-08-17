@@ -3,7 +3,7 @@ export default {
         async fetchMessages(ctx) {
             const res = await fetch('http://localhost:7000/api/messages/get', {
                 method: "GET",
-                mode: 'no-cors'
+                mode: 'cors'
             });
             const messages = await res.json();
             ctx.commit('updateMessages', messages);
@@ -11,7 +11,7 @@ export default {
         async addMessage(ctx, message) {
             const res = await fetch('http://localhost:7000/api/messages/insert', {
                 method: "POST",
-                mode: 'no-cors',
+                mode: 'cors',
                 body: JSON.stringify(message),
                 headers: {
                     "Content-Type": "application/json",
@@ -24,7 +24,7 @@ export default {
         async updateMessage(ctx, message) {
             const res = await fetch('http://localhost:7000/api/messages/put', {
                 method: "PUT",
-                mode: 'no-cors',
+                mode: 'cors',
                 body: JSON.stringify(message),
                 headers: {
                     "Content-Type": "application/json",

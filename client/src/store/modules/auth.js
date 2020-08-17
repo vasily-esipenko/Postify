@@ -3,7 +3,7 @@ export default {
         async registerUser(ctx, user) {
             const res = await fetch('http://localhost:7000/api/user/register', {
                 method: 'POST',
-                mode: 'no-cors',
+                mode: 'cors',
                 body: JSON.stringify(user),
                 headers: {
                     "Content-Type": "application/json",
@@ -23,7 +23,7 @@ export default {
         async loginUser(ctx, user) {
             const res = await fetch('http://localhost:7000/api/user/login', {
                 method: 'POST',
-                mode: 'no-cors',
+                mode: 'cors',
                 body: JSON.stringify(user),
                 headers: {
                     "Content-Type": "application/json",
@@ -47,7 +47,7 @@ export default {
         async verifyUser(ctx, token) {
             const res = await fetch('http://localhost:7000/api/user/verify', {
                 method: "POST",
-                mode: 'no-cors',
+                mode: 'cors',
                 body: JSON.stringify(token),
                 headers: {
                     "Content-Type": "application/json",
