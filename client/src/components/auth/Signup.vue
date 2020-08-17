@@ -68,7 +68,7 @@ export default {
         },
         validUser() {
             if (this.authForm.password != this.authForm.confirmPassword) {
-                this.alertMessage = `Passwords doesn't match. Try again, please`;
+                this.alertMessage = `Passwords don't match. Try again, please`;
                 return false;
             }
 
