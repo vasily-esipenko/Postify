@@ -2,6 +2,7 @@ export default {
     actions: {
         async fetchMessages(ctx) {
             const res = await fetch('http://localhost:7000/api/messages/get', {
+                method: "GET",
                 mode: 'no-cors'
             });
             const messages = await res.json();
